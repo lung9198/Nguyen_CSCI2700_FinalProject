@@ -14,12 +14,18 @@ int main(int argc, char* argv[])
     srand(time(0));
     Graph g;
     string input;
+    int test=0;
     g.createNodes();
-//    while(input!="abc123")
-//    {
-//        g.getAdj();
-//        cin>>input;
-//    }
-    cout<<"DONE"<<endl;
+    while(test!=1)
+    {
+        g.getAdj();
+        cout<<"-Which Outpost would you like to travel?"<<endl;
+        cin>>input;
+        g.action(input);
+        if(g.endGame()==1)
+        {
+            test=1;
+        }
+    }
     return 0;
 }

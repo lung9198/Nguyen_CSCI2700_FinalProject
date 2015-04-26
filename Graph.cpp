@@ -14,9 +14,24 @@ Graph::~Graph()
 {
     //dtor
 }
-void Graph::action()
+void Graph::action(string s)
 {
-
+    for(int i=0;i<vertices.size();i++)
+    {
+        if(vertices[i].name==s)
+        {
+            curIndex=i;
+        }
+    }
+}
+int Graph::endGame()
+{
+    if(curIndex==endIndex)
+    {
+        cout<<"CONGRADULATIONS!"<<endl;
+        return 1;
+    }
+    return 0;
 }
 void Graph::getAdj()
 {
@@ -29,7 +44,7 @@ void Graph::getAdj()
     cout<<"-# of Outpost from HQ- -||- ";
     for(int j=0;j<vertices[curIndex].adj.size();j++)
     {
-        cout<<vertices[curIndex].adj[j].v->fromEndPoint<" -||- ";
+        cout<<vertices[curIndex].adj[j].v->fromEndPoint<<" -||- ";
     }
     cout<<endl;
 }
@@ -44,7 +59,7 @@ void Graph::setDistance()
         if(i!=endIndex)
         {
             vertices[i].fromEndPoint=findPoint(i,endIndex);
-            //cout<<i<<"------"<<vertices[i].fromEndPoint<<endl;
+            cout<<i<<"------"<<vertices[i].fromEndPoint<<endl;
         }
 
     }
@@ -131,18 +146,12 @@ void Graph::setEdges()
                 vertices[i].row=e.front().row+1;
                 vertices[i].col=e.front().col;
                 e.push(vertices[i]);
-                //newc++;
-                cout<<"INDEX--"<<e.front().index+1<<endl;
-                cout<<i+1<<"        "<<"ROW--"<<vertices[i].row<<"COL--"<<vertices[i].col<<endl;
             }
             if(k==0 and check==1)
             {
                 addEdge(e.front().name,vertices[i].name,randt());
                 vertices[i].row=e.front().row+1;
                 vertices[i].col=e.front().col;
-                e.push(vertices[i]);
-                //newc++;
-                //cout<<i+1<<"        "<<"ROW--"<<vertices[i].row<<"COL--"<<vertices[i].col<<endl;
             }
             if(k==1 and check==1)
             {
@@ -151,10 +160,7 @@ void Graph::setEdges()
                 vertices[i].row=e.front().row;
                 vertices[i].col=e.front().col+1;
                 e.push(vertices[i]);
-                //newc++;
-                cout<<"INDEX--"<<e.front().index+1<<endl;
-                cout<<i+1<<"        "<<"ROW--"<<vertices[i].row<<"COL--"<<vertices[i].col<<endl;
-                                lvlc++;
+                lvlc++;
                 e.pop();
             }
             if(k==1 and check==0)
@@ -163,14 +169,12 @@ void Graph::setEdges()
                 addEdge(e.front().name,vertices[i].name,randt());
                 vertices[i].col=e.front().col+1;
                 vertices[i].row=e.front().row;
+                e.push(vertices[i]);
                 check=1;
                 lvlc++;
                 e.pop();
-                cout<<"INDEX--"<<e.front().index+1<<endl;
-                cout<<i+1<<"        "<<"ROW--"<<vertices[i].row<<"COL--"<<vertices[i].col<<endl;
             }
         }
-//        cout<<i<<"        "<<"ROW--"<<vertices[i].row<<"COL--"<<vertices[i].col<<endl;
         if(lvlc==levelcheck)
         {
             levelcheck=levelcheck+1;

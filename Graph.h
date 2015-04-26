@@ -64,10 +64,11 @@ class Graph
         //int rande();
         int randt();
         void setEndPoint();
-        void action();
+        void action(std::string);
         void getAdj();
         void setDistance();
         int findPoint(int, int);
+        int endGame();
 
     protected:
     private:
